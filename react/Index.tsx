@@ -14,18 +14,20 @@ interface SimilarProductsVariantsProps {
       productId: string
     }
   }
+  imageLabel: string
 }
 
 const CSS_HANDLES = [
   'variants',
   'title',
   'var-wrap',
-  'link_wrap',
-  'text',
+  'img_wrap',
+  'img',
 ] as const
 
 function SimilarProductsVariants({
   productQuery,
+  imageLabel,
 }: SimilarProductsVariantsProps) {
   const handles = useCssHandles(CSS_HANDLES)
   const intl = useIntl()
@@ -76,20 +78,24 @@ function SimilarProductsVariants({
         {intl.formatMessage({ id: 'store/title.label' })}
       </p>
       <div className={handles['var-wrap']}>
-        {items.map((element: ProductTypes.Product, index: number) => {
-          const dimensionSizeArray = items[index].specificationGroups.filter(
-            item => item.name === 'Dimensions'
-          )
+        {items.map((element: ProductTypes.Product) => {
+          const imageIndex =
+            imageLabel === undefined
+              ? 0
+              : element.items[0].images.findIndex(
+                  image => image.imageLabel === imageLabel
+                ) === -1
+              ? 0
+              : element.items[0].images.findIndex(
+                  image => image.imageLabel === imageLabel
+                )
 
-          const dimensionSizeText =
-            dimensionSizeArray.length && dimensionSizeArray[0].name
-              ? dimensionSizeArray[0].specifications[0].name
-              : `Size ${index + 1}`
+          const srcImage = element.items[0].images[imageIndex].imageUrl
 
           return (
             <Link
               key={element.productId}
-              className={`${handles.link_wrap}${
+              className={`${handles.img_wrap}${
                 route?.params?.slug === element.linkText ? '--is-active' : ''
               }`}
               {...{
@@ -100,7 +106,14 @@ function SimilarProductsVariants({
                 },
               }}
             >
-              <p className={`${handles.text}`}>{dimensionSizeText}</p>
+              <img
+                src={srcImage}
+                alt={element.productName}
+                height="50px"
+                className={`${handles.img} mr3 ${
+                  route?.params?.slug === element.linkText ? 'o-50' : ''
+                }`}
+              />
             </Link>
           )
         })}
