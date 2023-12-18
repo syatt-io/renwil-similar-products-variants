@@ -2,8 +2,7 @@
 
 The Similar Products Variants app returns similar products related to an SKU so users can select other dimensions of the same product.
 
-
-![similar-in-action](https://user-images.githubusercontent.com/67270558/147780521-db76029b-c1fa-4627-a8bb-fa7485355424.png)
+![Screenshot 2023-12-18 at 17 09 23](https://github.com/syatt-io/renwil-similar-products-variants/assets/44602686/4ef83766-0856-42af-8df0-b174d4c94d11)
 
 ## Before you start
 1. Set up similar products in your store’s **Products and SKU.** Access your store’s Admin and go to **Products > Catalog > Products and SKU**.
