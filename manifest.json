@@ -1,7 +1,7 @@
 {
-  "vendor": "vtex",
+  "vendor": "renwil",
   "name": "similar-products-variants",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "title": "similar-products-variants",
   "description": "similar-products-variants",
   "defaultLocale": "en",
